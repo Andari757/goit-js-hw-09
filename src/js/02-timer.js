@@ -1,18 +1,30 @@
 import flatpickr from "flatpickr";
+import Notiflix from 'notiflix';
+
 import "flatpickr/dist/flatpickr.min.css";
 const input = document.querySelector("#datetime-picker")
-
+const bStart = document.querySelector("button")
+let difference = 0;
+bStart.disabled=true
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  onClose(selectedDates) {
-    console.log(selectedDates[0]);
-    // console.log(Date()-selectedDates[0], Date())
-    
+  onClose(dateStr) {       
+    const selectedTime = new Date(dateStr).getTime()    
+    const now = new Date().getTime()
+    difference = selectedTime - now;        
+    if (difference > 0) {  
+      bStart.disabled = false      
+    } else {
+      Notiflix.Notify.failure("Please choose a date in the future")
+      bStart.disabled=true
+}
   },
 };
+
+
 flatpickr(input, options) 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
