@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 
 import "flatpickr/dist/flatpickr.min.css";
 const input = document.querySelector("#datetime-picker")
-const bStart = document.querySelector("button")
+const bStart = document.querySelector('[data-start]')
 let difference = 0;
 bStart.disabled=true
 const options = {
@@ -20,10 +20,12 @@ const options = {
     } else {
       Notiflix.Notify.failure("Please choose a date in the future")
       bStart.disabled=true
-}
+    }
   },
 };
-
+bStart.addEventListener("click", () => {
+  
+})
 
 flatpickr(input, options) 
 function convertMs(ms) {
