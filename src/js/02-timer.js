@@ -4,6 +4,13 @@ import Notiflix from 'notiflix';
 import "flatpickr/dist/flatpickr.min.css";
 const input = document.querySelector("#datetime-picker")
 const bStart = document.querySelector('[data-start]')
+const days = document.querySelector('[data-days]')
+const hours = document.querySelector('[data-hours]')
+const minutes = document.querySelector('[data-minutes]')
+const seconds = document.querySelector('[data-seconds]')
+const div = document.querySelector('.timer')
+const divs = document.querySelectorAll('.field')
+
 let difference = 0;
 bStart.disabled=true
 const options = {
@@ -11,10 +18,8 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  onClose(dateStr) {       
-    const selectedTime = new Date(dateStr).getTime()    
-    const now = new Date().getTime()
-    difference = selectedTime - now;        
+  onClose(dateStr) {
+    difference = new Date(dateStr).getTime() - new Date().getTime();      
     if (difference > 0) {  
       bStart.disabled = false      
     } else {
@@ -23,10 +28,30 @@ const options = {
     }
   },
 };
+
 bStart.addEventListener("click", () => {
-  
+  writeTime()
+  bStart.disabled=true
 })
 
+function writeTime() {   
+  let  timerId  = setInterval(() => {    
+  difference = difference-1000
+  const converted = convertMs(difference)  
+  days.textContent = addLeadingZero(converted.days)
+  hours.textContent = addLeadingZero(converted.hours)
+  minutes.textContent = addLeadingZero(converted.minutes)
+    seconds.textContent = addLeadingZero(converted.seconds)   
+    divs.forEach(e => {
+      e.style.marginRight = converted.seconds + "px";
+  if (difference <1000){clearInterval(timerId)}
+    });
+      
+   }, 1000);
+}
+function addLeadingZero(value) {
+  return value.toString().padStart(2,0)   
+}
 flatpickr(input, options) 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -48,3 +73,4 @@ function convertMs(ms) {
 }
 
 
+div.style.display = "flex"
