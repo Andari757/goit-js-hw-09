@@ -22,7 +22,7 @@ const form = document.querySelector(".form");
 //   const delay = parseInt(form.delay.value);
 //   const step = parseInt(form.step.value);
 //   for (let i = 1; i <= form.amount.value; i++) {
-//     createPromise(i, delay + (i - 1) * step)
+//     createPromise(i, delay + (i - 1) * step) 
 //       .then(({ position, delay }) => {
 //         console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
 //       })
