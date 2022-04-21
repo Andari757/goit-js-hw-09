@@ -1,5 +1,4 @@
-function createPromise(position, delay) {  
-  console.log(delay)
+function createPromise(position, delay) {    
   const shouldResolve = Math.random() > 0.3;
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -17,9 +16,8 @@ form.addEventListener("submit", (e) => {
   const amount = form.amount.value
   const step = form.step.value
   const delay = form.delay.value
-  let i = 1
-  while (i <= amount) {    
-    
+  
+  for (let i = 1; i <= amount; i++) {      
     createPromise(i, delay )
       .then(({ position, delay }) => {
     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`)
@@ -27,7 +25,7 @@ form.addEventListener("submit", (e) => {
   .catch(({ position, delay }) => {
     console.log(`❌ Rejected promise ${position} in ${delay}ms`)
   })
-    i++
+   
   }  
  
 })
