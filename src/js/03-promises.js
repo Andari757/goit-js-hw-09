@@ -1,4 +1,5 @@
 function createPromise(position, delay) {
+  console.log(delay)
   const shouldResolve = Math.random() > 0.3;
   return new Promise((resolve, reject) => {
     setTimeout(() => {
