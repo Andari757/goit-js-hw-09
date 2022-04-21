@@ -4,21 +4,21 @@ function createPromise(position, delay) {
      if (shouldResolve) {
     resolve(console.log(`✅ Fulfilled promise ${position} in ${delay}ms`))
   } else {
-    Reject(console.log(`❌ Rejected promise ${position} in ${delay}ms`))
+    reject(console.log(`❌ Rejected promise ${position} in ${delay}ms`))
   }
   })
   
  
 }
 const form = document.querySelector(".form")
-form.addEventListener("submit", () => {
-  form.submit.preventDefault()
+form.addEventListener("submit", (e) => {
+  e.preventDefault()
   const amount = form.amount.value
   const step = form.step.value
   const delay = form.delay.value
-  let i =1
-  while (i <= amount) {
+  let i = 1
+  while (i <= amount) {    
+    createPromise(i, delay)
     i++
-    createPromise(i,delay)
   }
 })
