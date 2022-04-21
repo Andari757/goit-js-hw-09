@@ -1,16 +1,14 @@
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
   return new Promise((resolve, reject) => {
-     setTimeout(() => {
-       if (shouldResolve) {
+    setTimeout(() => {
+      if (shouldResolve) {
     resolve(console.log(`✅ Fulfilled promise ${position} in ${delay}ms`))
   } else {
     reject(console.log(`❌ Rejected promise ${position} in ${delay}ms`))
-  }
+  }  
+    }, delay)})
   
-     }, delay)})
-  
- 
 }
 const form = document.querySelector(".form")
 form.addEventListener("submit", (e) => {
