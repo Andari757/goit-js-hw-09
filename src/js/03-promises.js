@@ -13,12 +13,12 @@ function createPromise(position, delay) {
 const form = document.querySelector(".form")
 form.addEventListener("submit", (e) => {
   e.preventDefault()
-  const amount = form.amount.value
-  const step = form.step.value
-  const delay = form.delay.value
+  const amount = parseInt(form.amount.value)
+  const step = parseInt(form.step.value)
+  const delay = parseInt(form.delay.value)
   
-  for (let i = 1; i <= amount; i++) {      
-    createPromise(i, delay )
+  for (let i = 1; i <= amount; i++) {    
+    createPromise(i, delay+step*(i-1) )
       .then(({ position, delay }) => {
     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`)
   })
